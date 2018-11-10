@@ -49,6 +49,8 @@ func AppendMeasureFiltered(b []byte, m stats.Measure, filters map[string]struct{
 			b = append(b, '|', 'c')
 		case stats.Gauge:
 			b = append(b, '|', 'g')
+		case stats.Distribution:
+			b = append(b, '|', 'd')
 		default:
 			b = append(b, '|', 'h')
 		}

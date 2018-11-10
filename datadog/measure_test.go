@@ -29,6 +29,7 @@ var (
 				Fields: []stats.Field{
 					stats.MakeField("count", 5, stats.Counter),
 					stats.MakeField("rtt", 100*time.Millisecond, stats.Histogram),
+					stats.MakeField("latency", 300*time.Millisecond, stats.Distribution),
 				},
 				Tags: []stats.Tag{
 					stats.T("answer", "42"),
@@ -37,6 +38,7 @@ var (
 			},
 			s: `request.count:5|c|#answer:42,hello:world
 request.rtt:0.1|h|#answer:42,hello:world
+request.latency:0.3|d|#answer:42,hello:world
 `,
 		},
 	}

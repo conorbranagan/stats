@@ -53,6 +53,10 @@ const (
 
 	// Histogram represents metrics to observe the distribution of values.
 	Histogram
+
+	// Distribution is used for server-side distributions and percentiles.
+	// This is supported primarily by the Datadog client.
+	Distribution
 )
 
 func (t FieldType) String() string {
@@ -63,6 +67,8 @@ func (t FieldType) String() string {
 		return "gauge"
 	case Histogram:
 		return "histogram"
+	case Distribution:
+		return "distribution"
 	}
 	return ""
 }
@@ -75,6 +81,8 @@ func (t FieldType) GoString() string {
 		return "stats.Gauge"
 	case Histogram:
 		return "stats.Histogram"
+	case Distribution:
+		return "stats.Distribution"
 	default:
 		return "stats.FieldType(" + strconv.Itoa(int(t)) + ")"
 	}

@@ -99,6 +99,11 @@ func (eng *Engine) Observe(name string, value interface{}, tags ...Tag) {
 	eng.measure(name, value, Histogram, tags...)
 }
 
+// ObserveDistribution reports value for a server-side distribution identified by name and tags.
+func (eng *Engine) ObserveDistribution(name string, value interface{}, tags ...Tag) {
+	eng.measure(name, value, Distribution, tags...)
+}
+
 // Clock returns a new clock identified by name and tags.
 func (eng *Engine) Clock(name string, tags ...Tag) *Clock {
 	cpy := make([]Tag, len(tags), len(tags)+1) // clock always appends a stamp.
@@ -239,6 +244,11 @@ func Set(name string, value interface{}, tags ...Tag) {
 // Observe reports value for the histogram identified by name and tags.
 func Observe(name string, value interface{}, tags ...Tag) {
 	DefaultEngine.Observe(name, value, tags...)
+}
+
+// ObserveDistribution reports value for a server-side distribution identified by name and tags.
+func ObserveDistribution(name string, value interface{}, tags ...Tag) {
+	DefaultEngine.ObserveDistribution(name, value, tags...)
 }
 
 // Report is a helper function that delegates to DefaultEngine.
